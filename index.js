@@ -30,13 +30,13 @@ socket.on('join', (name) => {
   });
 });
 	socket.on('disconnect', () => {
-        userService.removeUser(socket.id);
+        usersService.removeUser(socket.id);
         socket.broadcast.emit('update', {
-            users: userService.getAllUsers()
+            users: usersService.getAllUsers()
         });
     });
     socket.on('message', function (message) {
-        const { name } = userService.getUserById(socket.id);
+        const { name } = usersService.getUserById(socket.id);
         socket.broadcast.emit('message', {
             text: message.text,
             from: name
